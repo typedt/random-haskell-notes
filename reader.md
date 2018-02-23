@@ -201,7 +201,7 @@ instance (Monad m) => Monad (ReaderT r m) where
 Let's simply for **Reader**
 
 ```haskell
-instance (Monad m) => Monad (Reader r) where
+instance Monad (Reader r) where
   return = reader . const
 
   m >>= f = reader $ \ r -> runReader (f $ runReader m r) r
@@ -266,7 +266,6 @@ appendEnv x = reader $ \ r -> runReader ((\ e -> reader $ const (x, e)) (runRead
 appendEnv x = reader $ \ r -> runReader (reader $ const (x, (runReader (reader id)) r)) r
 appendEnv x = reader $ \ r -> runReader (reader $ const (x, r)) r
 appendEnv x = reader $ \ r -> const (x, r) r
-appendEnv x = reader $ const (x, r)
 ```
 In the above example, view `e <- ask` as apply `id` on environment and let `e`
 = id environment.
