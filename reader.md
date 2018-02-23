@@ -98,7 +98,7 @@ Another instance of typeclass **MonadReader** is **Reader**, which is
 defined in transformers package.
 
 **Reader** is defined as a type alias of **ReaderT r Identity**,
-there is such thing as the value constructor defined for **Reader** type,
+there is no such thing as the value constructor defined for **Reader** type,
 but the `reader` function can be roughly viewed as its constructor,
 when combined with the `runReader` function. `reader` wraps
 result of a function into an **Identity** monad, and `runReader` unwraps
