@@ -97,6 +97,13 @@ fr = local bar $ reader foo
 Another instance of typeclass **MonadReader** is **Reader**, which is
 defined in transformers package.
 
+**Reader** is defined as a type alias of **ReaderT r Identity**,
+there is such thing as the value constructor defined for **Reader** type,
+but the `reader` function can be roughly viewed as its constructor,
+when combined with the `runReader` function. `reader` wraps
+result of a function into an **Identity** monad, and `runReader` unwraps
+the result of the function from **Identity** monad by applying `runIdentity`.
+
 ```haskell
 -- transformers-0.5.5.0
 
@@ -271,4 +278,5 @@ appendEnv x = reader $ (,) x
 appendEnv = reader . (,)
 ```
 In the above example, view `e <- ask` as apply `id` on environment and let `e`
-= id environment.
+= `id` environment.
+
