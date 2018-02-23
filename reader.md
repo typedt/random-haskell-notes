@@ -1,6 +1,6 @@
 # The Reader Monad, MonadReader Class, and ReaderT Transformer
 
-Special monad type classes and their instances re defined in mtl.
+Some common and useful monad typeclasses and their instances are defined in mtl.
 eg., MonadReader class, MonadState class.
 
 Concrete monad transformers are defined in transformers.
