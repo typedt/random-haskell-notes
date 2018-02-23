@@ -237,7 +237,7 @@ enclosed environment of the reader.
 
 New readers are made from "appending" or "manipulating"
 computation of the original reader. Intuitively,
-"actions" on reader monads, creates new computation on
+"actions" on reader monads, create new computations on
 the same context (the enclosed environment).
 
 A simple example is,
@@ -268,6 +268,7 @@ appendEnv x = reader $ \ r -> runReader (reader $ const (x, r)) r
 appendEnv x = reader $ \ r -> const (x, r) r
 appendEnv x = reader $ \ r -> (x, r)
 appendEnv x = reader $ (,) x
+appendEnv = reader . (,)
 ```
 In the above example, view `e <- ask` as apply `id` on environment and let `e`
 = id environment.
