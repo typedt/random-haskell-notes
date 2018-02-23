@@ -105,6 +105,25 @@ result of a function into an **Identity** monad, and `runReader` unwraps
 the result of the function from **Identity** monad by applying `runIdentity`.
 
 ```haskell
+-- psuedo code
+
+-- Given
+runReader m = runIdentity . runReaderT m
+reader f = ReaderT (return . f)
+
+-- Then
+runReader (reader f) = runIdentity . runReaderT (ReaderT (return . f))
+runReader (reader f) = runIdentity . (Identity . f)
+(runReader . reader) f = f
+
+reader $ runReader m = ReaderT (Identity . (runReader m))
+(reader . runReader) m = ReaderT (Identity . runIdentity . runReaderT m)
+(reader . runReader) m = m
+```
+
+Original definition
+
+```haskell
 -- transformers-0.5.5.0
 
 type Reader = ReaderT r Identity
@@ -190,6 +209,8 @@ reader $ runReader m . f
 ## Reader As The Monad
 
 #### Definition
+
+Original definition
 
 ```haskell
 -- transformers-0.5.5.0
